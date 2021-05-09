@@ -1,4 +1,4 @@
-name: openweather
+name: open_weather
 description: A new Flutter application.
 
 # The following line prevents the package from being accidentally published to
@@ -24,12 +24,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_riverpod: any
-  http: ^0.12.0
 
+  flutter_riverpod: any
+
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:
