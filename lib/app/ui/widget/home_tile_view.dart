@@ -38,7 +38,7 @@ class _HomeTileViewState extends State<HomeTileView> {
             Expanded(
               child: Container(
                 alignment: Alignment.centerRight,
-                child: textLabel('Temp: ' + widget.cityTemp, 12.0, Colors.black, FontWeight.w700),
+                child: textLabel('Temp: ' + widget.cityTemp + ' \u2109', 12.0, Colors.black, FontWeight.w700),
               ),
             ),
             Expanded(

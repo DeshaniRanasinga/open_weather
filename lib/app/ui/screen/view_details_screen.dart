@@ -78,7 +78,7 @@ class _ViewDetailsPageState extends State<ViewDetailsPage>{
                 ),
                 Expanded(
                     child: containerView(
-                        widget.cityCode.main.temp.toString(),
+                        widget.cityCode.main.temp.toString() + ' \u2109',
                         14.0,
                         FontWeight.w700
                     ),
