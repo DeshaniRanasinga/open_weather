@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'app/home-screen.dart';
+import 'app/ui/screen/home-screen.dart';
 
 void main() {
   runApp(
@@ -22,8 +22,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Open Weather',
+      routes: {
+        '/homePage' : (BuildContext context) => new HomePage(),
+      },
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       home: HomePage(),
     );
