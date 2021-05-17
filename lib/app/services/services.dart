@@ -12,9 +12,7 @@ Future<CityModel> fetchCityDetails() async {
   if (response.statusCode != 200) return null;
 
   final items = jsonDecode(response.body);
-  CityModel cityModel = CityModel.fromJson(json.decode(response.body));
-
-  print('City Model:--> ${cityModel.list.elementAt(0).cityCode}');
+  print('ITEMS:--> ${items.toString()}');
   return CityModel.fromJson(items);
 }
 

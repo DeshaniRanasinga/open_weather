@@ -34,16 +34,16 @@ class ListElement {
   String status;
 
   factory ListElement.fromJson(Map<String, dynamic> json) => ListElement(
-    cityCode: json["CityCode"],
-    cityName: json["CityName"],
-    temp: json["Temp"],
-    status: json["Status"],
+    cityCode: json["CityCode"] == null ? '' : json["CityCode"],
+    cityName: json["CityName"] == null ? '' : json["CityName"],
+    temp: json["Temp"] == null ? '' : json["Temp"],
+    status: json["Status"] == null ? '' : json["Status"],
   );
 
   Map<String, dynamic> toJson() => {
-    "CityCode": cityCode,
-    "CityName": cityName,
-    "Temp": temp,
-    "Status": status,
+    "CityCode": cityCode == null ? '' : cityCode,
+    "CityName": cityName == null ? '' : cityName,
+    "Temp": temp == null ? '' : temp,
+    "Status": status == null ? '' : status,
   };
 }

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_weather/app/common/common.dart';
+import 'package:open_weather/app/model/city_model.dart';
 import 'package:open_weather/app/services/services.dart';
 import 'package:open_weather/app/state/state_manager.dart';
 import 'package:open_weather/app/ui/widget/home_tile_view.dart';
@@ -12,25 +15,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePagePageState extends State<HomePage>  with SingleTickerProviderStateMixin{
   AnimationController _controller;
-  final int time = 60;
+  final int time = 5;
+
+  Timer _timer;
 
   @override
   void initState() {
     super.initState();
-      _controller = AnimationController(vsync: this, duration: Duration(seconds: time))
-        ..addStatusListener((status) {
-          if (status == AnimationStatus.dismissed) {
-            context.refresh(cityDetailsStateFuture).timeout(Duration(seconds: 60));
-            _startCountdown();
-          }
-        });
-      _controller.reverse(from: _controller.value == 0.0 ? 1.0 : _controller.value);
-      _startCountdown();
-    }
+    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      if(!mounted) return;
+      context.refresh(cityDetailsStateFuture);
+    });
+  }
 
-    Future<Null> _startCountdown() async {
-      _controller.reverse(
-          from: _controller.value == 0.0 ? 1.0 : _controller.value);
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -43,10 +44,10 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Consumer(
-           builder: ((context, T Function<T>(ProviderBase<Object, T> provider) watch, child) {
+          Consumer(builder: ((context, T Function<T>(ProviderBase<Object, T> provider) watch, child) {
+            CityModel _city = watch(cityDetailsStateFuture)?.data?.value;
             return Expanded(
-                child: watch(cityDetailsStateFuture).data == null
+                child: _city == null
               ? Center(
                   child: Container(
                     height: 50.0,
@@ -63,9 +64,9 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
                            splashColor: Colors.grey,
                             child: HomeTileView(
                               weight: w,
-                              cityName: watch(cityDetailsStateFuture).data.value.list.elementAt(index).cityName.toString(),
-                              cityTemp: watch(cityDetailsStateFuture).data.value.list.elementAt(index).temp.toString(),
-                              cityStatus: watch(cityDetailsStateFuture).data.value.list.elementAt(index).status.toString(),
+                              cityName: _city.list.elementAt(index).cityName.toString(),
+                              cityTemp: _city.list.elementAt(index).temp.toString(),
+                              cityStatus: _city.list.elementAt(index).status.toString(),
                             ),
                             onTap: (){
                               fetchWeatherDetails(
