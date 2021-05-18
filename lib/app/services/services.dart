@@ -27,13 +27,13 @@ Future<WeatherModel> fetchWeatherDetails(String cityCode, BuildContext context) 
   final items = jsonDecode(response.body);
   WeatherModel weatherModel = WeatherModel.fromJson(json.decode(response.body));
 
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-        builder: (context) => ViewDetailsPage(
-            cityCode: WeatherModel.fromJson(items))
-    ),
-  );
+  // Navigator.push(
+  //   context,
+  //   MaterialPageRoute(
+  //       builder: (context) => ViewDetailsPage(
+  //           cityCode: WeatherModel.fromJson(items))
+  //   ),
+  // );
   return WeatherModel.fromJson(items);
 }
 

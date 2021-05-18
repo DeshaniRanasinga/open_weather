@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePagePageState extends State<HomePage>  with SingleTickerProviderStateMixin{
-  AnimationController _controller;
   final int time = 5;
 
   Timer _timer;
@@ -86,26 +85,5 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
       )
     );
   }
-
 }
 
-// class _HomePageState extends State<HomePage> {
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(
-//               'You have pushed the button this many times:',
-//             ),
-//           ],
-//         ),
-//       ), // This trailing comma makes auto-formatting nicer for build methods.
-//     );
-//   }
-// }
