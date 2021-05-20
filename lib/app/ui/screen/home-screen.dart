@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_weather/app/common/common.dart';
 import 'package:open_weather/app/model/city_model.dart';
-import 'package:open_weather/app/services/services.dart';
 import 'package:open_weather/app/state/state_manager.dart';
+import 'package:open_weather/app/ui/screen/increse_screen.dart';
+import 'package:open_weather/app/ui/screen/view_details_screen.dart';
 import 'package:open_weather/app/ui/widget/home_tile_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
   final int time = 5;
 
   Timer _timer;
+  CityModel city;
 
   @override
   void initState() {
@@ -39,6 +41,18 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
     return Scaffold(
       appBar: AppBar(
         title: textLabel('Open Weather', 24.0, Colors.white, FontWeight.w700),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => IncreasePage()
+                  ),
+                );
+              })
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,11 +82,17 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
                               cityStatus: _city.list.elementAt(index).status.toString(),
                             ),
                             onTap: (){
-                              fetchWeatherDetails(
-                                  watch(cityDetailsStateFuture).data.value.list.elementAt(index).cityCode.toString(), context
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ViewDetailsPage(
+                                        cityCode: _city.list.elementAt(index).cityCode.toString()
+                                    )
+                                ),
                               );
                             },
-                          )
+                          ),
+
                         ],
                       );
                     }

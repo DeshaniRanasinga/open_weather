@@ -32,7 +32,11 @@ class _HomeTileViewState extends State<HomeTileView> {
         child: Row(
           children: [
             Expanded(
-              child: textLabel(widget.cityName, 24.0, Colors.black, FontWeight.w700),
+              // child: textLabel(widget.cityName, 24.0, Colors.black, FontWeight.w700),
+              child: Text(
+                  widget.cityName,
+                  style: Theme.of(context).textTheme.headline5,
+              ),
               flex: 2,
             ),
             Expanded(
