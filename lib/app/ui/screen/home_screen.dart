@@ -10,6 +10,8 @@ import 'package:open_weather/app/ui/screen/increse_screen.dart';
 import 'package:open_weather/app/ui/screen/view_details_screen.dart';
 import 'package:open_weather/app/ui/widget/home_tile_view.dart';
 
+import 'counter_screen.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePagePageState createState() => _HomePagePageState();
@@ -44,7 +46,7 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
         title: textLabel('Open Weather', 24.0, Colors.white, FontWeight.w700),
         actions: [
           IconButton(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.adb),
               onPressed: (){
                 Navigator.push(
                   context,
@@ -52,7 +54,17 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
                       builder: (context) => IncreasePage()
                   ),
                 );
-              })
+              }),
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CounterPage()
+                  ),
+                );
+              }),
         ],
       ),
       body: Column(

@@ -36,10 +36,24 @@ class Counter extends StateNotifier<int> {
 final counterProvider2 = StateNotifierProvider((ref) => Counter());
 
 
+/*
+counter screen
+ */
+final valueProvide = Provider<int>((ref){
+  return 28;
+});
 
+/*
+StateProvider
 
+So far we managed to read a provider's value inside a widget.
+But Provider itself doesn't give us any capability to change its value.
+For that we need to create a StateProvider:
+ */
 
-
+final counterStateProvider1 = StateProvider<int>((ref) {
+  return 0;
+});
 
 
 

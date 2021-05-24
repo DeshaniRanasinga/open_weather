@@ -6,6 +6,7 @@ import 'app/ui/screen/home_screen.dart';
 
 void main() {
   runApp(
+    // wrap the root widget with a ProviderScope
     ProviderScope(
         child: MyApp()
     )
