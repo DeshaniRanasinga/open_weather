@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_weather/app/state/state_manager.dart';
+import 'package:open_weather/app/ui/screen/time_screen.dart';
 
 
 class CounterPage extends ConsumerWidget{
@@ -60,8 +61,19 @@ class CounterPage extends ConsumerWidget{
                             }
                           },
                           child: Icon(Icons.remove),
-                        )
+                        ),
                       ],
+                    ),
+                    ElevatedButton(
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TimePage()
+                            ),
+                          );
+                        },
+                        child: Text('Next'),
                     )
                   ],
                 ),
