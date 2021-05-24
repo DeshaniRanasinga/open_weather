@@ -47,7 +47,7 @@ class WeatherModel {
     sys: Sys.fromJson(json["sys"]),
     timezone: json["timezone"],
     id: json["id"],
-    name: json["name"],
+    name: json["name"] == null ? '' : json["name"],
     cod: json["cod"],
   );
 
@@ -63,7 +63,7 @@ class WeatherModel {
     "sys": sys.toJson(),
     "timezone": timezone,
     "id": id,
-    "name": name,
+    "name": name == null ? '' : name,
     "cod": cod,
   };
 }

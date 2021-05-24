@@ -1,29 +1,44 @@
-import 'package:flutter/material.dart';
-import 'package:open_weather/app/common/common.dart';
+import 'dart:async';
 
-class ViewDetailsPage extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:open_weather/app/common/common.dart';
+import 'package:open_weather/app/state/state_manager.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:open_weather/app/common/common.dart';
+import 'package:open_weather/app/state/state_manager.dart';
+
+class ViewDetailsPage extends ConsumerWidget {
   final String cityCode;
 
   ViewDetailsPage({
     this.cityCode
-});
+  });
+
+  final int time = 5;
+
+  Timer _timer;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+  //     if(!mounted) return;
+  //     context.refresh(cityDetailsStateFuture);
+  //   });
+  // }
+
+  // @override
+  // void dispose() {
+  //   _timer?.cancel();
+  //   super.dispose();
+  // }
 
   @override
-  _ViewDetailsPageState createState() => _ViewDetailsPageState();
-}
-
-
-class _ViewDetailsPageState extends State<ViewDetailsPage>{
-  AnimationController _controller;
-  final int time = 60;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final value = watch(weatherDetailsStateFuture(cityCode));
     return Scaffold(
       appBar: AppBar(
         leading: new IconButton(
@@ -42,8 +57,8 @@ class _ViewDetailsPageState extends State<ViewDetailsPage>{
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                capitalLatterTextLabel('widget.cityCode.name', 42.0, Colors.black, FontWeight.w700),
-                textLabel('widget.cityCode.id.toString()', 10.0, Colors.black, null)
+                capitalLatterTextLabel('${value?.data?.value?.name??''}', 42.0, Colors.black, FontWeight.w700),
+                textLabel('${value?.data?.data?.value?.id??''}', 10.0, Colors.black, null)
               ],
             ),
           ),
@@ -56,25 +71,26 @@ class _ViewDetailsPageState extends State<ViewDetailsPage>{
               children: [
                 Expanded(
                   child: containerView(
-                      'widget.cityCode.weather.elementAt(0).description.toString()',
+                      '${value?.data?.value?.weather?.elementAt(0)?.description??''}',
                       28.0,
                       FontWeight.w500
                   ),
                   flex: 2,
                 ),
                 Expanded(
-                    child: containerView(
-                       '',
+                  child: containerView(
+                      '${value?.data?.value?.main?.temp??''}' + ' \u2109',
                       //  widget.cityCode.main.temp.toString() + ' \u2109',
-                        14.0,
-                        FontWeight.w700
-                    ),
+                      14.0,
+                      FontWeight.w700
+                  ),
                 ),
               ],
             ),
           ),
         ],
-      )
+      ),
     );
   }
 }
+

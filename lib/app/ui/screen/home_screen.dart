@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,8 +58,11 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Consumer(builder: ((context, T Function<T>(ProviderBase<Object, T> provider) watch, child) {
+          Consumer(
+            builder: ((context, T Function<T>(ProviderBase<Object, T> provider) watch, child) {
             CityModel _city = watch(cityDetailsStateFuture)?.data?.value;
+            print(_city);
+            // debugger();
             return Expanded(
                 child: _city == null
               ? Center(
@@ -99,8 +103,6 @@ class _HomePagePageState extends State<HomePage>  with SingleTickerProviderState
                 )
             );
           }),)
-
-
         ],
       )
     );

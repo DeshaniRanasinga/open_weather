@@ -53,6 +53,28 @@ class _IncreasePageState extends State<IncreasePage>{
                   }
               ),
 
+              Consumer(
+                  builder: (_, watch, __){
+                    StateController<int> value = watch(counterProvider);
+                    return ElevatedButton(
+                        onPressed: () => value.state++,
+                        child: Text('${value.state}')
+                    );
+                  }
+              ),
+
+
+
+              // Consumer(
+              //     builder: (_, ScopedReader watch, __){
+              //       int value2 = watch(counterProvider).state;
+              //       return ElevatedButton(
+              //           // onPressed: () => ++,
+              //           child: Text('${value2}')
+              //       );
+              //     }
+              // ),
+
             ],
         ));
   }

@@ -9,14 +9,9 @@ final cityDetailsStateFuture = FutureProvider<CityModel>((ref) async {
   return fetchCityDetails();
 });
 
-
-final weatherDetailsStateFuture = FutureProvider<WeatherModel>((ref) async {
-  String cityCode;
-  return fetchWeatherDetails(cityCode);
+final weatherDetailsStateFuture = FutureProvider.family<WeatherModel, String>((ref, cityId) async {
+  return fetchWeatherDetails(cityId);
 });
-
-
-
 
 final counterStateProvider = StateProvider<int>((ref){
   return 10;
@@ -30,9 +25,31 @@ final helloWorldProvider = Provider((_) => 'Hello World');
 
 final counterProvider = StateProvider((ref) => 0);
 
+
+
+class Counter extends StateNotifier<int> {
+  Counter(): super(0);
+
+  void increment() => state++;
+}
+
+final counterProvider2 = StateNotifierProvider((ref) => Counter());
+
+
+
+
+
+
+
+
+
 // final userProvider = FutureProvider.autoDispose.family<User, int>((ref, userId) async{
 //   return fetchUser(userId);
 // });
+
+//fetchWeatherDetails
+
+
 
 
 

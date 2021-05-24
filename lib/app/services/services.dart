@@ -18,13 +18,13 @@ Future<CityModel> fetchCityDetails() async {
 
 Future<WeatherModel> fetchWeatherDetails(String cityCode) async {
   final response = await http.get
-    ('https://api.openweathermap.org/data/2.5/weather?id='+ cityCode +'&appid=b523d1feed605d845b1e5f9967af91ad');
+    ('https://api.openweathermap.org/data/2.5/weather?id='+ cityCode.toString() +'&appid=b523d1feed605d845b1e5f9967af91ad');
 
   if (response.statusCode != 200) return null;
 
   final items = jsonDecode(response.body);
   WeatherModel weatherModel = WeatherModel.fromJson(json.decode(response.body));
-  print('WEATHER:--> ${weatherModel.toString()}');
+  print('WEATHER:--> ${response.body}');
 
   return WeatherModel.fromJson(items);
 }
